@@ -32,6 +32,7 @@ public:
                 for(int i=1; i<=6; i++)
                 {
                     int v = u+i;
+                    if(v>30) break;
                     if(v==30) return ans;
                     if(!visited[v])
                     {
