@@ -13,9 +13,7 @@ class Solution
     {
         // code here
         vector<bool> visited(V,false);
-        vector<int> dist(V, 1e9);
         int ans = 0;
-        dist[0] = 0;
         priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
         pq.push({0,0});
         while(!pq.empty())
@@ -30,11 +28,7 @@ class Solution
             {
                 if(!visited[v[0]])
                 {
-                    if(dist[v[0]]>v[1])
-                    {
-                        dist[v[0]] = v[1];
-                        pq.push({v[1],v[0]});
-                    }
+                    pq.push({v[1],v[0]});
                 }
             }
             
