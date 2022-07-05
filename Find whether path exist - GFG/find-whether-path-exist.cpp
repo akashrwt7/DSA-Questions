@@ -27,17 +27,17 @@ class Solution
     {
         //code here
         int n = grid.size();
-        int i,j;
+        int i=0,j=0;
         for( i=0; i<n; i++)
         {
             for( j=0; j<n; j++)
             {
                 if(grid[i][j]==1)
-                return DFS(grid,i,j,n);
+                break;
             }
+            if(grid[i][j]==1) break;
         }
-        return false;
-        
+        return DFS(grid,i,j,n);
     }
 };
 
