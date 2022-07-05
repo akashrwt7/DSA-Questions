@@ -92,34 +92,37 @@ struct Node
 
 class Solution {
 public:
-   int sum = INT_MIN;
-   int findMaxPathSum(Node *root)
-   {
-     if (!root)
-       return 0;
-   
-     int lsum = findMaxPathSum(root->left);
-     int rsum = findMaxPathSum(root->right);
-     if (!root->left and !root->right)
-       return root->data;
-       
-     if (!root->left)
-       return root->data + rsum;
-       
-     if (!root->right)
-       return root->data + lsum;
-       
-     sum = max(sum, root->data + lsum + rsum);
-     return max(root->data + lsum, root->data + rsum);
-   }
-   
-   int maxPathSum(Node *root)
-   {
-     int ans = findMaxPathSum(root);
-     if(!root->left or !root->right)
-           sum = max(sum, ans);
-     return sum;
-   }
+int ans = INT_MIN;
+    int maxPathSum2(Node* root)
+    {
+        // code here
+        if(root==NULL) return 0;
+        int left = maxPathSum2(root->left);
+        int right = maxPathSum2(root->right);
+        
+         if (!root->left and !root->right)
+           return root->data;
+           
+         if (!root->left)
+           return root->data + right;
+           
+         if (!root->right)
+           return root->data + left;
+        
+        int sum = root->data + left + right;
+        // cout<<root->data<<" "<<left<<" "<<right<<" "<<sum<<endl;
+        ans = max(ans, sum);
+        
+        return max(left+root->data,right+root->data);
+    }
+    
+    int maxPathSum(Node* root)
+    {
+        int x = maxPathSum2(root);
+        if(!root->left || !root->right)
+            ans = max(ans,x);
+        return ans;
+    }
 
 };
 
