@@ -12,30 +12,37 @@ class Solution
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         // code here
-        vector<int> dist(V, INT_MAX);
-        vector<bool> visited(V, false);
-        dist[0] = 0;
+        vector<bool> visited(V,false);
+        vector<int> dist(V, 1e9);
         int ans = 0;
-        for(int i=0; i<V; i++)
+        dist[0] = 0;
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        pq.push({0,0});
+        while(!pq.empty())
         {
-            int u = -1;
-            for(int j=0; j<V; j++)
-            {
-                if(!visited[j] && (u==-1 || dist[u]>dist[j]))
-                {
-                    u = j;
-                }
-            }
-            visited[u] = true;
-            ans += dist[u];
+            auto p = pq.top();
+            int u = p.second;
+            pq.pop();
+            if(visited[u]) continue;
+            ans += p.first;
+            visited[u] = 1;
             for(auto v:adj[u])
             {
                 if(!visited[v[0]])
-                    dist[v[0]] = min(dist[v[0]], v[1]);
-                // cout<<v[0];
+                {
+                    if(dist[v[0]]>v[1])
+                    {
+                        dist[v[0]] = v[1];
+                        pq.push({v[1],v[0]});
+                    }
+                }
             }
+            
         }
         return ans;
+        
+        
+        
     }
 };
 
