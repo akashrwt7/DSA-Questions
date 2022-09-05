@@ -26,9 +26,9 @@ public:
         queue<Node *> q;
         if(!root) return ans;
         q.push(root);
+        vector<int> lvl;
         while(!q.empty()){
             int s = q.size();
-            vector<int> lvl;
             for(int i=0; i<s; i++)
             {
                 Node *temp = q.front();
@@ -40,6 +40,7 @@ public:
                 }
             }
             ans.push_back(lvl);
+            lvl.clear();
         }
         return ans;
     }
